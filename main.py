@@ -2,10 +2,14 @@ import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
+# توكن البوت الخاص بك الذي أخذناه من BotFather
 TOKEN = "9065541736:AAFdTlRsJCWJvSm9eXZehNDCIL8qWT5iY2w"
+
+# رابط الواجهة الذي رفعناه على Netlify
 WEB_APP_URL = "https://bespoke-manatee-225de6.netlify.app"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # إنشاء زر يفتح واجهة الإعدادات مباشرة
     keyboard = [
         [InlineKeyboardButton("⚙️ افتح إعدادات قلعة الفاتحون", web_app=WebAppInfo(url=WEB_APP_URL))]
     ]
