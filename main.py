@@ -1,32 +1,11 @@
-import logging
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+import telebot
 
-# توكن البوت الخاص بك الذي أخذناه من BotFather
 TOKEN = "9065541736:AAFdTlRsJCWJvSm9eXZehNDCIL8qWT5iY2w"
+bot = telebot.TeleBot(TOKEN)
 
-# رابط الواجهة الذي رفعناه على Netlify
-WEB_APP_URL = "https://bespoke-manatee-225de6.netlify.app"
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "أهلاً بك يا شرف في بوت إدارة قلعة الفاتحون 🏰")
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # إنشاء زر يفتح واجهة الإعدادات مباشرة
-    keyboard = [
-        [InlineKeyboardButton("⚙️ افتح إعدادات قلعة الفاتحون", web_app=WebAppInfo(url=WEB_APP_URL))]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    await update.message.reply_text(
-        "أهلاً بك يا شرف في بوت إدارة قلعة الفاتحون 🏰\n"
-        "اضغط على الزر بالأسفل لفتح لوحة الإعدادات والتحكم بالمهام:",
-        reply_markup=reply_markup
-    )
-
-def main():
-    app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    
-    print("Bot is running...")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()
+print("Bot is running...")
+bot.infinity_polling()
