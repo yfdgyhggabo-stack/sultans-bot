@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات بوت الفاتحون</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #b71c1c;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .section-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+        label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: #b71c1c;
+        }
+        .btn-save {
+            width: 100%;
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-save:hover {
+            background-color: #961515;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🏰 إعدادات القلعة</h2>
+
+    <div class="section">
+        <div class="section-title">🎯 إعدادات المهارات</div>
+        <label><input type="checkbox" id="skill1" checked> الحرفي البارع</label>
+        <label><input type="checkbox" id="skill2" checked> حصاد الموارد</label>
+        <label><input type="checkbox" id="skill3"> الجمع السريع</label>
+        <label><input type="checkbox" id="skill5" checked> التدريب البطولي</label>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📦 إعدادات الصناديق والمهام اليومية</div>
+        <label><input type="checkbox" id="box1" checked> الصندوق اليومي 1 (30 نقطة)</label>
+        <label><input type="checkbox" id="box2" checked> الصندوق اليومي 2 (70 نقطة)</label>
+        <label><input type="checkbox" id="box3" checked> الصندوق اليومي 3 (120 نقطة)</label>
+        <label><input type="checkbox" id="quest1" checked> خوض المواجهات</label>
+        <label><input type="checkbox" id="quest2" checked> تبرع للحلف واستلام الجوائز</label>
+    </div>
+
+    <button class="btn-save" onclick="saveSettings()">حفظ الإعدادات</button>
+</div>
+
+<script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+
+    function saveSettings() {
+        let settings = {
+            skill1: document.getElementById('skill1').checked,
+            skill2: document.getElementById('skill2').checked,
+            skill3: document.getElementById('skill3').checked,
+            skill5: document.getElementById('skill5').checked,
+            box1: document.getElementById('box1').checked,
+            box2: document.getElementById('box2').checked,
+            box3: document.getElementById('box3').checked,
+            quest1: document.getElementById('quest1').checked,
+            quest2: document.getElementById('quest2').checked
+        };
+
+        tg.sendData(JSON.stringify(settings));
+        tg.close();
+    }
+</script>
+
+</body>
+</html>
